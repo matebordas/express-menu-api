@@ -1,19 +1,14 @@
 import express from "express";
 import * as ItemController from "./menuItems.controller";
 
-export const itemsRouter = express.Router();
+export const menuItemsRouter = express.Router();
 
-// GET items/
-itemsRouter.get("/", ItemController.getMenuItems)
+menuItemsRouter.get("/", ItemController.getMenuItems)
 
-// GET items/:id
-itemsRouter.get("/:id", ItemController.getMenuItemById);
+menuItemsRouter.get("/:id", ItemController.getMenuItemById);
 
-// POST items
-itemsRouter.post("/", ItemController.createMenuItem);
+menuItemsRouter.post("/", ItemController.createMenuItem);
 
-// PUT items/:id
-itemsRouter.put("/:id", ItemController.updateMenuItem);
+menuItemsRouter.put("/:id", ItemController.updateMenuItem);
 
-// DELETE items/:id
-itemsRouter.delete("/:id", ItemController.deleteMenuItem);
+menuItemsRouter.delete("/:id", ItemController.deleteMenuItem);

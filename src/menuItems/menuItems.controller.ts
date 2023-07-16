@@ -15,7 +15,6 @@ export async function getMenuItems(req: Request, res: Response) {
     }
 }
 
-// GET items/:id
 export async function getMenuItemById(req: Request, res: Response) {
     const id: number = parseInt(req.params.id, 10);
 
@@ -32,7 +31,6 @@ export async function getMenuItemById(req: Request, res: Response) {
     }
 }
 
-// POST items
 export async function createMenuItem(req: Request, res: Response) {
     try {
         const item: BaseMenuItem = req.body;
@@ -45,7 +43,6 @@ export async function createMenuItem(req: Request, res: Response) {
     }
 }
 
-// PUT items/:id
 export async function updateMenuItem(req: Request, res: Response) {
     const id: number = parseInt(req.params.id, 10);
 
@@ -67,7 +64,6 @@ export async function updateMenuItem(req: Request, res: Response) {
     }
 }
 
-// DELETE items/:id
 export async function deleteMenuItem(req: Request, res: Response) {
     try {
         const id: number = parseInt(req.params.id, 10);
