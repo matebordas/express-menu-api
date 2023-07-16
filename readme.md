@@ -1,3 +1,3 @@
 ### Sample REST API
 
-Using this repo to learn NodeJS REST API development
+Using this repo to learn NodeJS REST API development.
