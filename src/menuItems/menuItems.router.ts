@@ -3,12 +3,14 @@ import * as ItemController from "./menuItems.controller";
 
 export const menuItemsRouter = express.Router();
 
-menuItemsRouter.get("/", ItemController.getMenuItems)
+const menuItemsRouteBase = '/menu/items';
 
-menuItemsRouter.get("/:id", ItemController.getMenuItemById);
+menuItemsRouter.get(`${menuItemsRouteBase}/`, ItemController.getMenuItems)
 
-menuItemsRouter.post("/", ItemController.createMenuItem);
+menuItemsRouter.get(`${menuItemsRouteBase}/:id`, ItemController.getMenuItemById);
 
-menuItemsRouter.put("/:id", ItemController.updateMenuItem);
+menuItemsRouter.post(`${menuItemsRouteBase}/`, ItemController.createMenuItem);
 
-menuItemsRouter.delete("/:id", ItemController.deleteMenuItem);
+menuItemsRouter.put(`${menuItemsRouteBase}/:id`, ItemController.updateMenuItem);
+
+menuItemsRouter.delete(`${menuItemsRouteBase}/:id`, ItemController.deleteMenuItem);
