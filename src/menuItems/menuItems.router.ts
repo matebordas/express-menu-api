@@ -1,7 +1,7 @@
 import express from "express";
 import * as ItemController from "./menuItems.controller";
 
-export const menuItemsRouter = express.Router();
+const menuItemsRouter = express.Router();
 
 const menuItemsRouteBase = '/menu/items';
 
@@ -14,3 +14,7 @@ menuItemsRouter.post(`${menuItemsRouteBase}/`, ItemController.createMenuItem);
 menuItemsRouter.put(`${menuItemsRouteBase}/:id`, ItemController.updateMenuItem);
 
 menuItemsRouter.delete(`${menuItemsRouteBase}/:id`, ItemController.deleteMenuItem);
+
+export {
+  menuItemsRouter
+}
