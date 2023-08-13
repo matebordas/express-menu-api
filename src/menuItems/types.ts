@@ -5,11 +5,10 @@ export interface BaseMenuItem {
     description: string;
     image: string;
   }
-  
-  export interface MenuItem extends BaseMenuItem {
-    id: number;
-  }
-  
+
+export interface MenuItem extends BaseMenuItem {
+  id: number;
+}
 
 export interface MenuItems {
   [key: number]: MenuItem;
