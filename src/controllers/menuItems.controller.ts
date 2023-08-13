@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
-import * as ItemService from "./menuItems.service";
+import * as ItemService from "../services/menuItems.service";
 
-import { MenuItem, BaseMenuItem } from "./types";
+import { MenuItem, BaseMenuItem } from "../types";
 
 export const itemsRouter = express.Router();
 

@@ -16,7 +16,7 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-import { menuItemsRouter } from "./menuItems/menuItems.router";
+import { menuItemsRouter } from "./routers/menuItems.router";
 
 const routesBase = 'api';
 app.use(`/${routesBase}`, menuItemsRouter);

@@ -1,5 +1,5 @@
-import { BaseMenuItem, MenuItems, MenuItem } from "./types";
-import * as MenuItemDAO from './menuItems.dao';
+import { BaseMenuItem, MenuItems, MenuItem } from "../types";
+import * as MenuItemDAO from '../DAOs/menuItems.dao';
 
 let items: MenuItems = {
   1: {

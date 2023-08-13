@@ -1,5 +1,5 @@
-import {dbPool} from "../db/dbConnection";
-import {MenuItem} from "./types";
+import {dbPool} from "../config/db.config";
+import {MenuItem} from "../types";
 import {RowDataPacket} from "mysql2/typings/mysql/lib/protocol/packets/RowDataPacket";
 
 interface MenuItemRecord extends MenuItem, RowDataPacket {}
