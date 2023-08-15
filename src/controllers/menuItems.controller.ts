@@ -3,13 +3,24 @@ import * as ItemService from "../services/menuItems.service";
 
 import { MenuItem, BaseMenuItem } from "../types";
 
+const defaultErrorMessage = "An error occurred";
+
+function getErrorMessage(error: unknown) {
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  return defaultErrorMessage;
+}
+
 export async function getMenuItems(req: Request, res: Response) {
   try {
     const items: MenuItem[] = await ItemService.findAll();
 
     res.status(200).send(items);
   } catch (e) {
-    res.status(500).send(e.message);
+    const errorMessage = getErrorMessage(e);
+    res.status(500).send(errorMessage);
   }
 }
 
@@ -24,8 +35,9 @@ export async function getMenuItemById(req: Request, res: Response) {
     }
 
     res.status(404).send("item not found");
-  } catch (e) {
-    res.status(500).send(e.message);
+  } catch (e: unknown) {
+    const errorMessage = getErrorMessage(e);
+    res.status(500).send(errorMessage);
   }
 }
 
@@ -36,8 +48,9 @@ export async function createMenuItem(req: Request, res: Response) {
     const newItem = await ItemService.create(item);
 
     res.status(201).json(newItem);
-  } catch (e) {
-    res.status(500).send(e.message);
+  } catch (e: unknown) {
+    const errorMessage = getErrorMessage(e);
+    res.status(500).send(errorMessage);
   }
 }
 
@@ -57,8 +70,9 @@ export async function updateMenuItem(req: Request, res: Response) {
     const newItem = await ItemService.create(itemUpdate);
 
     res.status(201).json(newItem);
-  } catch (e) {
-    res.status(500).send(e.message);
+  } catch (e: unknown) {
+    const errorMessage = getErrorMessage(e);
+    res.status(500).send(errorMessage);
   }
 }
 
@@ -68,7 +82,8 @@ export async function deleteMenuItem(req: Request, res: Response) {
     await ItemService.remove(id);
 
     res.sendStatus(204);
-  } catch (e) {
-    res.status(500).send(e.message);
+  } catch (e: unknown) {
+    const errorMessage = getErrorMessage(e);
+    res.status(500).send(errorMessage);
   }
 }
