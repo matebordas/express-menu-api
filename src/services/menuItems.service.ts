@@ -1,33 +1,33 @@
 import { BaseMenuItem, MenuItems, MenuItem } from "../types";
-import * as MenuItemDAO from '../DAOs/menuItems.dao';
+import * as MenuItemDAO from "../DAOs/menuItems.dao";
 
-let items: MenuItems = {
+const items: MenuItems = {
   1: {
     id: 1,
     name: "Burger",
     price: 599,
     description: "Tasty",
-    image: "https://cdn.auth0.com/blog/whatabyte/burger-sm.png"
+    image: "https://cdn.auth0.com/blog/whatabyte/burger-sm.png",
   },
   2: {
     id: 2,
     name: "Pizza",
     price: 299,
     description: "Cheesy",
-    image: "https://cdn.auth0.com/blog/whatabyte/pizza-sm.png"
+    image: "https://cdn.auth0.com/blog/whatabyte/pizza-sm.png",
   },
   3: {
     id: 3,
     name: "Tea",
     price: 199,
     description: "Informative",
-    image: "https://cdn.auth0.com/blog/whatabyte/tea-sm.png"
-  }
+    image: "https://cdn.auth0.com/blog/whatabyte/tea-sm.png",
+  },
 };
 
 export const findAll = async (): Promise<MenuItem[]> => {
   return await MenuItemDAO.selectAll();
-}
+};
 
 export const find = async (id: number): Promise<MenuItem> => items[id];
 
@@ -44,7 +44,7 @@ export const create = async (newItem: BaseMenuItem): Promise<MenuItem> => {
 
 export const update = async (
   id: number,
-  itemUpdate: BaseMenuItem
+  itemUpdate: BaseMenuItem,
 ): Promise<MenuItem | null> => {
   const item = await find(id);
 
