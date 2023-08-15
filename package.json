@@ -2,9 +2,11 @@
   "name": "express-menu-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --pretty --transpile-only src/app.ts",
+    "build": "npx tsc",
+    "start:prod": "npm run build && node dist/app.js",
+    "start:dev": "ts-node-dev --respawn --pretty --transpile-only src/app.ts",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "prettier": "prettier src/**/*.ts --write --ignore-unknown",
