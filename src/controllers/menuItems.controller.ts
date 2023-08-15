@@ -5,7 +5,6 @@ import { MenuItem, BaseMenuItem } from "../types";
 
 export async function getMenuItems(req: Request, res: Response) {
   try {
-
     const items: MenuItem[] = await ItemService.findAll();
 
     res.status(200).send(items);
