@@ -7,10 +7,10 @@
     "build": "npx tsc",
     "start:prod": "npm run build && node dist/app.js",
     "start:dev": "ts-node-dev --respawn --pretty --transpile-only src/app.ts",
-    "lint": "eslint src/**/*.ts",
+    "lint": "eslint ./src/**/*.ts && prettier . --check",
     "lint:fix": "eslint src/**/*.ts --fix",
-    "prettier": "prettier src/**/*.ts --write --ignore-unknown",
-    "prettier:fix": "npm run prettier && npm run lint:fix",
+    "prettier:write": "prettier . --write --ignore-unknown",
+    "format": "npm run prettier:write && npm run lint:fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "lint-staged": {
