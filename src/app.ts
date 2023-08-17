@@ -18,7 +18,7 @@ app.use(express.json());
 
 import { menuItemsRouter } from "./routers/menuItems.router";
 
-const routesBase = 'api';
+const routesBase = "api";
 app.use(`/${routesBase}`, menuItemsRouter);
 
 app.listen(PORT, () => {
