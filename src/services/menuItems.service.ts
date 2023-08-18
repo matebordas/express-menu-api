@@ -1,5 +1,5 @@
 import { Service } from "typedi";
-import { MenuItemsRepository } from "../repositories/menuItems.repository";
+import { MenuItemsRepository } from "../repositories/MenuItems.repository";
 import { BaseMenuItem, MenuItems, MenuItem } from "../types";
 
 const items: MenuItems = {
