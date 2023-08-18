@@ -1,5 +1,6 @@
+import { Service } from "typedi";
+import { MenuItemsRepository } from "../repositories/menuItems.repository";
 import { BaseMenuItem, MenuItems, MenuItem } from "../types";
-import * as MenuItemDAO from "../repositories/menuItems.repository";
 
 const items: MenuItems = {
   1: {
@@ -25,44 +26,52 @@ const items: MenuItems = {
   },
 };
 
-export const findAll = async (): Promise<MenuItem[]> => {
-  return await MenuItemDAO.selectAll();
-};
+@Service()
+export class MenuItemsService {
+  menuItemsRepository: MenuItemsRepository;
 
-export const find = async (id: number): Promise<MenuItem> => items[id];
-
-export const create = async (newItem: BaseMenuItem): Promise<MenuItem> => {
-  const id = new Date().valueOf();
-
-  items[id] = {
-    id,
-    ...newItem,
-  };
-
-  return items[id];
-};
-
-export const update = async (
-  id: number,
-  itemUpdate: BaseMenuItem,
-): Promise<MenuItem | null> => {
-  const item = await find(id);
-
-  if (!item) {
-    return null;
+  constructor(menuItemsRepository: MenuItemsRepository) {
+    this.menuItemsRepository = menuItemsRepository;
   }
 
-  items[id] = { id, ...itemUpdate };
-
-  return items[id];
-};
-
-export const remove = async (id: number): Promise<null | void> => {
-  const item = await find(id);
-
-  if (!item) {
-    return null;
+  async findAll(): Promise<MenuItem[]> {
+    return await this.menuItemsRepository.findAll();
   }
 
-  delete items[id];
-};
+  async find(id: number): Promise<MenuItem> {
+    return items[id];
+  }
+
+  async create(newItem: BaseMenuItem): Promise<MenuItem> {
+    const id = new Date().valueOf();
+
+    items[id] = {
+      id,
+      ...newItem,
+    };
+
+    return items[id];
+  }
+
+  async update(id: number, itemUpdate: BaseMenuItem): Promise<MenuItem | null> {
+    const item = await this.find(id);
+
+    if (!item) {
+      return null;
+    }
+
+    items[id] = { id, ...itemUpdate };
+
+    return items[id];
+  }
+
+  async remove(id: number): Promise<null | void> {
+    const item = await this.find(id);
+
+    if (!item) {
+      return null;
+    }
+
+    delete items[id];
+  }
+}
