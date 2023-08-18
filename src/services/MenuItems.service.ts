@@ -2,30 +2,6 @@ import { Service } from "typedi";
 import { MenuItemsRepository } from "../repositories/MenuItems.repository";
 import { BaseMenuItem, MenuItems, MenuItem } from "../types";
 
-const items: MenuItems = {
-  1: {
-    id: 1,
-    name: "Burger",
-    price: 599,
-    description: "Tasty",
-    image: "https://cdn.auth0.com/blog/whatabyte/burger-sm.png",
-  },
-  2: {
-    id: 2,
-    name: "Pizza",
-    price: 299,
-    description: "Cheesy",
-    image: "https://cdn.auth0.com/blog/whatabyte/pizza-sm.png",
-  },
-  3: {
-    id: 3,
-    name: "Tea",
-    price: 199,
-    description: "Informative",
-    image: "https://cdn.auth0.com/blog/whatabyte/tea-sm.png",
-  },
-};
-
 @Service()
 export class MenuItemsService {
   menuItemsRepository: MenuItemsRepository;
@@ -39,39 +15,30 @@ export class MenuItemsService {
   }
 
   async find(id: number): Promise<MenuItem> {
-    return items[id];
+    return await this.menuItemsRepository.find(id);
   }
 
   async create(newItem: BaseMenuItem): Promise<MenuItem> {
-    const id = new Date().valueOf();
-
-    items[id] = {
-      id,
-      ...newItem,
-    };
-
-    return items[id];
+    return await this.menuItemsRepository.create(newItem);
   }
 
-  async update(id: number, itemUpdate: BaseMenuItem): Promise<MenuItem | null> {
+  async update(id: number, itemUpdate: BaseMenuItem): Promise<MenuItem> {
     const item = await this.find(id);
 
     if (!item) {
-      return null;
+      throw Error(`No item found with id ${id}`);
     }
 
-    items[id] = { id, ...itemUpdate };
-
-    return items[id];
+    return await this.menuItemsRepository.update(id, itemUpdate);
   }
 
-  async remove(id: number): Promise<null | void> {
+  async remove(id: number): Promise<void> {
     const item = await this.find(id);
 
     if (!item) {
-      return null;
+      throw Error(`No item found with id ${id}`);
     }
 
-    delete items[id];
+    return await this.menuItemsRepository.remove(id);
   }
 }
