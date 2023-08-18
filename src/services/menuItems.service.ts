@@ -1,5 +1,5 @@
 import { BaseMenuItem, MenuItems, MenuItem } from "../types";
-import * as MenuItemDAO from "../DAOs/menuItems.dao";
+import * as MenuItemDAO from "../repositories/menuItems.repository";
 
 const items: MenuItems = {
   1: {
