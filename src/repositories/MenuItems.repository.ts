@@ -42,7 +42,8 @@ export class MenuItemsRepository {
   }
 
   async create(newItem: BaseMenuItem): Promise<MenuItem> {
-    const query = `INSERT INTO menu_items (name, price, description, image) VALUES (?, ?, ?, ?);`;
+    const query =
+      "INSERT INTO menu_items (name, price, description, image) VALUES (?, ?, ?, ?);";
 
     const { name, price, description, image } = newItem;
 
@@ -67,7 +68,8 @@ export class MenuItemsRepository {
   }
 
   async update(id: number, itemUpdate: BaseMenuItem): Promise<MenuItem> {
-    const query = `UPDATE menu_items SET name = ?, price= ?, description= ?, image= ? WHERE id = ?;`;
+    const query =
+      "UPDATE menu_items SET name = ?, price= ?, description= ?, image= ? WHERE id = ?;";
 
     const { name, price, description, image } = itemUpdate;
 
