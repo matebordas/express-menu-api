@@ -1,24 +1,33 @@
-import express from "express";
-import * as ItemController from "../controllers/menuItems.controller";
+import Container from "typedi";
+import express, { RequestHandler } from "express";
+import { MenuItemsController } from "../controllers/MenuItems.controller";
 
 const menuItemsRouter = express.Router();
+const ROUTES_BASE = "/menu/items";
 
-const menuItemsRouteBase = "/menu/items";
+const requestNameToMethodMap = {
+  GET: "get",
+  POST: "post",
+  PUT: "put",
+  PATCH: "patch",
+  DELETE: "delete",
+} as const;
 
-menuItemsRouter.get(`${menuItemsRouteBase}/`, ItemController.getMenuItems);
+function route(
+  methodName: keyof typeof requestNameToMethodMap,
+  subpath: string,
+  callback: RequestHandler,
+) {
+  const method = requestNameToMethodMap[methodName];
+  menuItemsRouter[method](`${ROUTES_BASE}${subpath}`, callback);
+}
 
-menuItemsRouter.get(
-  `${menuItemsRouteBase}/:id`,
-  ItemController.getMenuItemById,
-);
+const menuItemsController = Container.get(MenuItemsController);
 
-menuItemsRouter.post(`${menuItemsRouteBase}/`, ItemController.createMenuItem);
-
-menuItemsRouter.put(`${menuItemsRouteBase}/:id`, ItemController.updateMenuItem);
-
-menuItemsRouter.delete(
-  `${menuItemsRouteBase}/:id`,
-  ItemController.deleteMenuItem,
-);
+route("GET", `/`, menuItemsController.findAll.bind(menuItemsController));
+route("GET", `/:id`, menuItemsController.find.bind(menuItemsController));
+route("POST", `/`, menuItemsController.create.bind(menuItemsController));
+route("PUT", `/:id`, menuItemsController.update.bind(menuItemsController));
+route("DELETE", `/:id`, menuItemsController.delete.bind(menuItemsController));
 
 export { menuItemsRouter };
