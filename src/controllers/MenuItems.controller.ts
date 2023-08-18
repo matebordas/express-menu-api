@@ -103,7 +103,7 @@ export class MenuItemsController {
   async delete(req: Request, res: Response) {
     try {
       const id: number = parseInt(req.params.id, 10);
-      await this.menuItemsService.delete(id);
+      await this.menuItemsService.remove(id);
 
       res.sendStatus(204);
     } catch (e: unknown) {
